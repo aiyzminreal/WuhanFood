@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>管理员页面</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div>
+    <button id="tab-users" class="active" style="color: rgb(66, 45, 0);background-color: rgb(250, 250, 230);
+    margin-top: 65px;border-color: rgb(219, 189, 18);padding: 7px;font-size: 19px;cursor: pointer;">用户管理</button>
+    <button id="tab-comments"style="color: rgb(66, 45, 0);background-color: rgb(250, 250, 230);
+    margin-top: 1px;border-color: rgb(219, 189, 18);padding: 7px;font-size: 19px;cursor: pointer;">评论管理</button>
+    <button id="tab-shops"style="color: rgb(66, 45, 0);background-color: rgb(250, 250, 230);
+    margin-top: 1px;border-color: rgb(219, 189, 18);padding: 7px;font-size: 19px;cursor: pointer;">商家管理</button>
+  </div>
+
+  <div id="panel-users">
+    <h2>用户管理</h2>
+    <table>
+      <thead>
+        <tr><th>ID</th><th>用户名</th><th>角色</th><th>状态</th><th>操作</th></tr>
+      </thead>
+      <tbody id="user-table-body"></tbody>
+    </table>
+  </div>
+
+  <div id="panel-comments" style="display: none;">
+    <h2>评论管理</h2>
+    <table>
+      <thead>
+        <tr><th>ID</th><th>用户</th><th>店铺</th><th>内容</th><th>时间</th><th>状态</th><th>操作</th></tr>
+      </thead>
+      <tbody id="comment-table-body"></tbody>
+    </table>
+  </div>
+
+  <div id="panel-shops" style="display: none;">
+    <h2>商家管理</h2>
+    <table>
+      <thead>
+        <tr><th>ID</th><th>名称</th><th>地址</th><th>分类</th><th>状态</th><th>操作</th></tr>
+      </thead>
+      <tbody id="shop-table-body"></tbody>
+    </table>
+  </div>
+
+  <div id="edit-shop-modal" style="display: none;">
+    <form id="edit-shop-form">
+      <h2>编辑商家</h2>
+      <input type="hidden" id="edit-shop-id">
+      <div>
+        <label>店铺名称:</label>
+        <input type="text" id="edit-shop-name">
+      </div>
+      <div>
+        <label>地址:</label>
+        <input type="text" id="edit-address">
+      </div>
+      <div>
+        <label>分类:</label>
+        <input type="text" id="edit-category">
+      </div>
+      <div>
+        <label>营业时间:</label>
+        <input type="text" id="edit-business-hours">
+      </div>
+      <div>
+        <label>最低人数:</label>
+        <input type="number" id="edit-min-people">
+      </div>
+      <div>
+        <label>最高人数:</label>
+        <input type="number" id="edit-max-people">
+      </div>
+      <div>
+        <label>最低价格:</label>
+        <input type="number" id="edit-min-price">
+      </div>
+      <div>
+        <label>最高价格:</label>
+        <input type="number" id="edit-max-price">
+      </div>
+      <div>
+        <label>推荐等级:</label>
+        <input type="text" id="edit-recommend-level">
+      </div>
+      <div>
+        <label>特色菜:</label>
+        <input type="text" id="edit-specialty-dishes">
+      </div>
+      <button type="submit">保存</button>
+      <button type="button" onclick="closeEditModal()">取消</button>
+    </form>
+  </div>
+
+  <div id="edit-user-modal" style="display: none;">
+    <form id="edit-user-form">
+      <h2>编辑用户</h2>
+      <input type="hidden" id="edit-user-id">
+      <div>
+        <label>用户名:</label>
+        <input type="text" id="edit-username">
+      </div>
+      <div>
+        <label>角色:</label>
+        <select id="edit-role">
+          <option value="user">用户端</option>
+          <option value="admin">管理员端</option>
+          <option value="shop">店家端</option>
+        </select>
+      </div>
+      <button type="submit">保存</button>
+      <button type="button" onclick="closeEditUserModal()">取消</button>
+    </form>
+  </div>
+
+  <script src="admin.js"></script>
+</body>
+</html>

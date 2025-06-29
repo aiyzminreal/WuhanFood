@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>店铺评论</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Noto Sans SC', sans-serif;
+      background: linear-gradient(135deg, #fefcea 0%, #f1da36 100%);
+      margin: 0;
+      padding: 0;
+      color: #3a3a3a;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+    }
+    .container {
+      width: 100%;
+      max-width: 800px;
+      padding: 20px;
+    }
+
+    /* 返回按钮 */
+    .back-btn {
+      background: none;
+      border: none;
+      color: #e67e22;
+      font-size: 1rem;
+      cursor: pointer;
+      padding: 8px 0;
+      transition: color .3s, transform .1s;
+    }
+    .back-btn:hover {
+      color: #d35400;
+    }
+    .back-btn:active {
+      transform: translateX(-2px);
+    }
+
+    /* 标题 */
+    h2, h3 {
+      margin: 20px 0 10px;
+      color: #e67e22;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+    }
+    h2 {
+      font-size: 2rem;
+    }
+    h3 {
+      font-size: 1.3rem;
+      border-bottom: 2px solid #f0c27b;
+      padding-bottom: 6px;
+    }
+
+    /* 店铺信息面板 */
+    #shop-info {
+      background: rgba(255,255,255,0.9);
+      padding: 16px;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+
+    /* 评论列表 */
+    #comment-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      color: #2f1e04;
+    }
+    .comment-item {
+      background: #fff9d6;
+      padding: 14px;
+      margin-bottom: 12px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(209, 25, 25, 0.05);
+      transition: transform .2s, box-shadow .2s;
+    }
+    .comment-item:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    }
+    .comment-header {
+      font-size: 0.9rem;
+      color: #888;
+      margin-bottom: 6px;
+    }
+    .comment-content {
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+    .rating {
+      color: #f9b23f;
+      font-size: 1.1rem;
+      margin-left: 6px;
+    }
+
+    /* 发表评论区域 */
+    .post-section {
+      background: rgba(255,255,255,0.9);
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      margin-top: 20px;
+    }
+    .post-section input,
+    .post-section select,
+    .post-section textarea {
+      width: 100%;
+      padding: 12px;
+      border: 2px solid #f0c27b;
+      border-radius: 6px;
+      font-size: 16px;
+      margin-top: 8px;
+      outline: none;
+      transition: border-color .3s, box-shadow .3s;
+    }
+    .post-section input:focus,
+    .post-section select:focus,
+    .post-section textarea:focus {
+      border-color: #e67e22;
+      box-shadow: 0 0 8px rgba(230,126,34,0.3);
+    }
+    #post-btn {
+      margin-top: 12px;
+      padding: 12px 24px;
+      background: #f9b239;
+      border: none;
+      border-radius: 8px;
+      color: #fff;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background .3s, transform .1s;
+    }
+    #post-btn:hover {
+      background: #e67e22;
+    }
+    #post-btn:active {
+      transform: scale(0.98);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <button class="back-btn" onclick="history.back()">← 返回</button>
+    <h2 id="shop-name">加载店铺…</h2>
+    <div id="shop-info"></div>
+
+    <h3>历史评论</h3>
+    <ul id="comment-list"></ul>
+
+    <div class="post-section">
+      <h3>发表评论</h3>
+      <!-- ✅ 正确添加 form -->
+      <form id="comment-form">
+        <input type="text" id="username" placeholder="你的昵称" required>
+        <label style="display:block; margin-top:12px;">
+          评分：
+          <select id="rating">
+            <option value="5">★★★★★</option>
+            <option value="4">★★★★☆</option>
+            <option value="3">★★★☆☆</option>
+            <option value="2">★★☆☆☆</option>
+            <option value="1">★☆☆☆☆</option>
+          </select>
+        </label>
+        <textarea id="content" placeholder="写下你的评论…" style="min-height:100px;" required></textarea>
+        <button type="submit" id="post-btn">提交评论</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="./comment_detail.js"></script>
+</body>
+</html>

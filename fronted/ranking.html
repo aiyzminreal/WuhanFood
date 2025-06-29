@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>搜索排行榜</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC&display=swap" rel="stylesheet" />
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      font-family: 'Noto Sans SC', sans-serif;
+      margin: 0;
+      padding-top: 120px;
+      background: url('https://cdn.pixabay.com/photo/2017/08/30/07/52/trophy-2695193_1280.png') no-repeat top center,
+                  linear-gradient(135deg, #ffeaa7, #fab1a0);
+      background-size: 180px auto, cover;
+      color: #2d3436;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    h2 {
+      font-size: 2.2rem;
+      color: #d35400;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+      margin-bottom: 30px;
+      text-align: center;
+    }
+    #ranking-list {
+      width: 90%;
+      max-width: 700px;
+      background: rgba(255,255,255,0.95);
+      padding: 25px;
+      border-radius: 16px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+    }
+    .rank-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 18px;
+      margin-bottom: 12px;
+      background: #fdfdfd;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      transition: transform 0.2s;
+    }
+    .rank-item:hover {
+      transform: translateY(-3px);
+    }
+    .rank-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .rank-index {
+      width: 32px;
+      text-align: center;
+      font-size: 1.4rem;
+      font-weight: bold;
+    }
+    .rank-index.gold::before   { content: '🥇'; }
+    .rank-index.silver::before { content: '🥈'; }
+    .rank-index.bronze::before { content: '🥉'; }
+    .rank-name {
+      font-size: 1.1rem;
+    }
+    .rank-right {
+      font-weight: bold;
+      color: #e67e22;
+    }
+    .pagination {
+      margin: 20px 0 40px;
+      text-align: center;
+    }
+    .page-btn {
+      margin: 0 8px;
+      padding: 12px 22px;
+      background: linear-gradient(to right, #f39c12, #e67e22);
+      color: #fff;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      font-weight: bold;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      transition: background 0.3s, transform 0.1s;
+    }
+    .page-btn:hover {
+      background: linear-gradient(to right, #f1c40f, #e67e22);
+    }
+    .page-btn:active {
+      transform: scale(0.96);
+    }
+    #page-info {
+      font-size: 1rem;
+      margin: 0 12px;
+      font-weight: bold;
+      vertical-align: middle;
+    }
+  </style>
+</head>
+<body>
+  <h2>🏆 搜索排行榜（点击量 Top50）</h2>
+
+  <div id="ranking-list" style="background-color: #fcf9ea;">
+    <!-- 这里由你的 ranking.js 填充 .rank-item -->
+  </div>
+
+  <div class="pagination">
+    <button id="prev-btn" class="page-btn">上一页</button>
+    <span id="page-info"></span>
+    <button id="next-btn" class="page-btn">下一页</button>
+  </div>
+
+  <script src="./ranking.js"></script>
+</body>
+</html>

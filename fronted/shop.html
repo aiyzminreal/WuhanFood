@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>我的店铺</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="auth-container">
+    <h2>我的店铺</h2>
+    <button class="action-btn" onclick="openAddShopModal()">添加店铺</button>
+    <div id="panel-shops">
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>店铺名称</th>
+            <th>地址</th>
+            <th>分类</th>
+            <th>点击量</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody id="shop-table-body"></tbody>
+      </table>
+    </div>
+
+    <!-- 添加店铺模态框 -->
+    <div id="add-shop-modal" style="display: none;">
+      <h3>添加店铺</h3>
+      <form id="add-shop-form">
+        <label>店铺名称: <input id="add-shop-name" required></label>
+        <label>地址: <input id="add-address" required></label>
+        <label>分类:
+          <select id="add-category" required>
+            <option value="">请选择分类</option>
+            <option value="五谷杂粮">五谷杂粮</option>
+            <option value="早餐">早餐</option>
+            <option value="烧烤">烧烤</option>
+            <option value="面包甜点">面包甜点</option>
+          </select>
+        </label>
+        <label>地区:
+          <select id="add-region" required>
+            <option value="">请选择地区</option>
+            <option value="武昌">武昌</option>
+            <option value="汉口">汉口</option>
+            <option value="汉阳">汉阳</option>
+            <option value="青山">青山</option>
+            <option value="蔡甸">蔡甸</option>
+            <option value="硚口">硚口</option>
+            <option value="江夏">江夏</option>
+          </select>
+        </label>
+        <label>营业时间:
+          <select id="add-business-hours">
+            <option value="">请选择营业时间</option>
+            <option value="早餐">早餐</option>
+            <option value="午餐">午餐</option>
+            <option value="晚餐">晚餐</option>
+            <option value="夜宵">夜宵</option>
+          </select>
+        </label>
+        <label>菜系: <input id="add-cuisine-type"></label>
+        <label>特色菜: <textarea id="add-specialty-dishes"></textarea></label>
+        <label>最低人数: <input id="add-min-people" type="number"></label>
+        <label>最高人数: <input id="add-max-people" type="number"></label>
+        <label>最低价格: <input id="add-min-price" type="number" step="0.01"></label>
+        <label>最高价格: <input id="add-max-price" type="number" step="0.01"></label>
+        <button type="submit">保存</button>
+        <button type="button" onclick="closeAddModal()">取消</button>
+      </form>
+    </div>
+
+    <!-- 编辑店铺模态框 -->
+    <div id="edit-shop-modal" style="display: none;">
+      <h3>编辑店铺</h3>
+      <form id="edit-shop-form">
+        <input type="hidden" id="edit-shop-id">
+        <label>店铺名称: <input id="edit-shop-name" required></label>
+        <label>地址: <input id="edit-address" required></label>
+        <label>分类:
+          <select id="edit-category" required>
+            <option value="">请选择分类</option>
+            <option value="五谷杂粮">五谷杂粮</option>
+            <option value="早餐">早餐</option>
+            <option value="烧烤">烧烤</option>
+            <option value="面包甜点">面包甜点</option>
+          </select>
+        </label>
+        <label>地区:
+          <select id="edit-region" required>
+            <option value="">请选择地区</option>
+            <option value="武昌">武昌</option>
+            <option value="汉口">汉口</option>
+            <option value="汉阳">汉阳</option>
+            <option value="青山">青山</option>
+            <option value="蔡甸">蔡甸</option>
+            <option value="硚口">硚口</option>
+            <option value="江夏">江夏</option>
+          </select>
+        </label>
+        <label>营业时间:
+          <select id="edit-business-hours">
+            <option value="">请选择营业时间</option>
+            <option value="早餐">早餐</option>
+            <option value="午餐">午餐</option>
+            <option value="晚餐">晚餐</option>
+            <option value="夜宵">夜宵</option>
+          </select>
+        </label>
+        <label>菜系: <input id="edit-cuisine-type"></label>
+        <label>特色菜: <textarea id="edit-specialty-dishes"></textarea></label>
+        <label>最低人数: <input id="edit-min-people" type="number"></label>
+        <label>最高人数: <input id="edit-max-people" type="number"></label>
+        <label>最低价格: <input id="edit-min-price" type="number" step="0.01"></label>
+        <label>最高价格: <input id="edit-max-price" type="number" step="0.01"></label>
+        <label>推荐等级: <input id="edit-recommend-level"></label>
+        <button type="submit">保存</button>
+        <button type="button" onclick="closeEditModal()">取消</button>
+      </form>
+    </div>
+
+    <!-- 查看评论模态框 -->
+    <div id="comment-modal" style="display: none;">
+      <h3>店铺评论</h3>
+      <div id="comment-list"></div>
+      <button type="button" onclick="closeCommentModal()">关闭</button>
+    </div>
+
+    <button style="color: rgb(139, 99, 13);background-color: rgb(250, 250, 230);
+    margin-top: 30px;border-color: rgb(219, 189, 18);padding: 3px;font-size: 19px;cursor: pointer;"><a href="login.html">退出登录</a></button>
+  </div>
+
+  <script src="shop.js"></script>
+</body>
+</html>

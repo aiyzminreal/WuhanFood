@@ -1,0 +1,325 @@
+/* ====== 全局样式 ====== */
+body {
+  font-family: 'Noto Sans SC', sans-serif, Arial, sans-serif;
+  background-color: #f8f5e6;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  display: flex; /* 首页主布局使用flex实现左右分栏 */
+}
+
+/* ====== 地图容器 ====== */
+#map-container {
+  width: 70%;
+  height: 100vh;
+}
+
+/* ====== 侧边栏 ====== */
+#sidebar {
+  width: 30%;
+  height: 100vh;
+  box-sizing: border-box;
+  padding: 20px;
+  background: #fff8f0;
+  box-shadow: -3px 0 8px rgba(0, 0, 0, 0.1);
+  border-left: 1px solid #f0c27b;
+  color: #3a3a3a;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 侧边栏标题 */
+#sidebar h3 {
+  font-size: 1.4rem;
+  margin-bottom: 10px;
+  border-bottom: 2px solid #f9b239;
+  padding-bottom: 4px;
+  color: #e67e22;
+}
+
+/* 搜索表单元素 */
+#search-form input,
+#search-form select,
+#search-form button {
+  width: 100%;
+  padding: 8px 10px;
+  margin: 6px 0 12px;
+  border-radius: 6px;
+  border: 1px solid #f0c27b;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+  box-sizing: border-box;
+}
+
+/* 表单元素聚焦状态 */
+#search-form input:focus,
+#search-form select:focus {
+  border-color: #e67e22;
+  outline: none;
+  box-shadow: 0 0 8px #f9b239aa;
+}
+
+/* 搜索按钮 */
+#search-form button {
+  background: #f9b239;
+  border: none;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 3px 6px #f9b239aa;
+  transition: background 0.3s ease;
+}
+
+#search-form button:hover {
+  background: #e67e22;
+  box-shadow: 0 5px 10px #e67e22cc;
+}
+
+/* 餐馆列表项 */
+#restaurant-list > div {
+  background: #fff;
+  padding: 14px 18px;
+  margin-bottom: 14px;
+  border-radius: 10px;
+  box-shadow: 0 3px 6px #f0c27b77;
+  transition: box-shadow 0.3s ease;
+}
+
+#restaurant-list > div:hover {
+  box-shadow: 0 6px 12px #f9b239bb;
+}
+
+/* 统一按钮样式 */
+button {
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+/* 隐藏旧的 .search-panel（如果首页没用就隐藏） */
+.search-panel {
+  display: none !important;
+}
+
+/* 编辑模态框样式（商家和用户共用） */
+#edit-shop-modal form,
+#edit-user-modal form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#edit-shop-modal label,
+#edit-user-modal label {
+  font-weight: 600;
+  color: #444;
+  margin-bottom: 5px;
+}
+
+#edit-shop-modal input,
+#edit-shop-modal select,
+#edit-user-modal input,
+#edit-user-modal select {
+  padding: 8px;
+  border: 1px solid #f0c27b;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+#edit-shop-modal input:focus,
+#edit-shop-modal select:focus,
+#edit-user-modal input:focus,
+#edit-user-modal select:focus {
+  border-color: #e67e22;
+  outline: none;
+  box-shadow: 0 0 8px #f9b239aa;
+}
+
+#edit-shop-modal button[type="submit"],
+#edit-user-modal button[type="submit"] {
+  background: #f9b239;
+  border: none;
+  color: white;
+  padding: 10px;
+  cursor: pointer;
+}
+
+#edit-shop-modal button[type="submit"]:hover,
+#edit-user-modal button[type="submit"]:hover {
+  background: #f89e4f;
+}
+
+#edit-shop-modal button[type="button"],
+#edit-user-modal button[type="button"] {
+  background: #ccc;
+  border: none;
+  color: #333;
+  padding: 10px;
+  cursor: pointer;
+}
+
+#edit-shop-modal button[type="button"]:hover,
+#edit-user-modal button[type="button"]:hover {
+  background: #bbb;
+}
+
+/* 新增：表格样式（用户管理、评论审核、商家管理） */
+#panel-users table,
+#panel-comments table,
+#panel-shops table {
+  width: 95%;
+  border-collapse: collapse;
+  table-layout: fixed; /* 固定表格布局，确保列宽均匀 */
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 3px 6px #f8a42777;
+  margin-top: 10px;
+}
+
+#panel-users th,
+#panel-users td,
+#panel-comments th,
+#panel-comments td,
+#panel-shops th,
+#panel-shops td {
+  padding: 10px;
+  text-align: center; /* 内容居中对齐 */
+  border-bottom: 1px solid #f0c27b;
+  font-size: 1rem;
+  color: #3a3a3a;
+}
+
+/* 用户管理表格：5列，均匀分布 */
+#panel-users th,
+#panel-users td {
+  width: 20%; /* 5列，每列占20% */
+}
+
+/* 评论审核表格：6列，均匀分布 */
+#panel-comments th,
+#panel-comments td {
+  width: 16.67%; /* 6列，每列占16.67% */
+}
+
+/* 商家管理表格：6列，均匀分布 */
+#panel-shops th,
+#panel-shops td {
+  width: 16.67%; /* 6列，每列占16.67% */
+}
+
+/* 表头样式 */
+#panel-users th,
+#panel-comments th,
+#panel-shops th {
+  background: #f9b239;
+  color: white;
+  font-weight: 600;
+}
+
+/* 操作按钮样式 */
+.action-btn {
+  padding: 6px 12px;
+  margin: 0 4px;
+  background: #f9b239;
+  border: none;
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.action-btn:hover {
+  background: #e67e22;
+}
+
+/* 表格悬浮效果 */
+#panel-users tr:hover,
+#panel-comments tr:hover,
+#panel-shops tr:hover {
+  background: #fff8f0;
+}
+/* 店铺评论模态框 */
+#comment-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(255, 255, 255, 0.95);
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+  max-width: 600px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+  z-index: 2;
+}
+
+.comment {
+  border-bottom: 1px solid #ddd;
+  padding: 10px 0;
+}
+
+.reply {
+  margin-left: 20px;
+  border-left: 2px solid #f9b239;
+  padding-left: 10px;
+}
+
+.reply-form {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.reply-content {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.reply-form button {
+  padding: 8px 16px;
+  background-color: #f9b239;
+  border: none;
+  border-radius: 4px;
+  color: #fff;
+  cursor: pointer;
+}
+
+.reply-form button:hover {
+  background-color: #e67e22;
+}
+/* 子评论样式 */
+.sub-comments {
+  margin-left: 20px;
+  border-left: 2px solid #f9b239;
+  padding-left: 10px;
+  list-style: none;
+}
+
+.sub-comments li {
+  margin-top: 10px;
+}
+
+/* 回复按钮样式 */
+.reply-btn {
+  margin-left: 10px;
+  padding: 5px 10px;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.reply-btn:hover {
+  background-color: #e0e0e0;
+}
+
+.reply-btn.active {
+  background-color: #f9b239;
+  color: #fff;
+  border-color: #f9b239;
+}

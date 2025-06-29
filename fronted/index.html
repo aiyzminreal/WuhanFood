@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>武汉美食 POI 查询系统</title>
+  <script src="https://webapi.amap.com/maps?v=2.0&key=2024c5f9433e3501f4292255e7fd83e6"></script>
+  
+  <style>
+      .locate-btn {
+      display: inline-flex;
+      align-items: center;
+      padding: 9px 10px;
+      margin-bottom: 5px;
+      background-color: #fff09b;
+      color: rgb(98, 79, 17);
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 15px;
+    }
+    .locate-btn:hover {
+      background-color: #ffe942;
+    }
+    .locate-btn .icon {
+      width: 16px;
+      height: 16px;
+      margin-right: 6px;
+      background-image: url('data:image/svg+xml;utf8,\
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">\
+<path fill="white" d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5S13.38 11.5 12 11.5z"/>\
+</svg>');
+      background-size: contain;
+      background-repeat: no-repeat;
+    }
+
+    /* 列表项信息样式 */
+    .shop-item {
+      padding: 8px 0;
+      border-bottom: 1px solid #ebeef5;
+    }
+    .shop-item .info {
+      font-size: 13px;
+      color:rgb(98, 79, 17);
+      margin-top: 2px;
+    }
+    * {
+      box-sizing: border-box;
+    }
+    body, html {
+      margin: 0; padding: 0;
+      height: 100%;
+      font-family: 'Noto Sans SC', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #fffef8;
+      color: #333;
+    }
+
+    /* 整体布局 */
+    #map-container {
+      width: 60%;
+      height: 97vh;
+      float: right;
+      border-right: 1px solid #ddd;
+    }
+    #sidebar {
+      width: 40%;
+      height: 97vh;
+      float: left;
+      padding: 20px 25px;
+      background: #fff9f0;
+      box-shadow: -5px 0 12px rgba(245, 198, 79, 0.2);
+      overflow-y: auto;
+    }
+
+    /* 标题 */
+    #sidebar h3 {
+      margin-top: 0;
+      margin-bottom: 15px;
+      font-weight: 700;
+      font-size: 1.6rem;
+      color: #f5c64f;
+      border-bottom: 2px solid #f5c64f;
+      padding-bottom: 6px;
+    }
+
+    /* 搜索表单整体网格 */
+    #search-form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-gap: 14px 20px;
+      margin-bottom: 30px;
+    }
+
+    /* 让某些控件跨两列（全宽） */
+    #search-form input[type="text"]#shop_name,
+    #search-form button {
+      grid-column: span 2;
+    }
+
+    /* 表单控件 */
+    #search-form input,
+    #search-form select {
+      padding: 10px 12px;
+      font-size: 1rem;
+      border: 1.8px solid #f5c64f;
+      border-radius: 6px;
+      outline: none;
+      transition: border-color 0.3s ease;
+      background: #fff;
+      color: #444;
+    }
+    #search-form input::placeholder {
+      color: #bbb;
+    }
+
+    #search-form input:focus,
+    #search-form select:focus {
+      border-color: #f1a935;
+      box-shadow: 0 0 8px #f5c64faa;
+    }
+
+    /* 搜索按钮 */
+    #search-form button {
+    width: 97%;
+      background-color: #f5c64f;
+      border: none;
+      color: #fff;
+      font-weight: 700;
+      cursor: pointer;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      padding: 12px 0;
+      box-shadow: 0 5px 10px #f5c64faa;
+      transition: background-color 0.3s ease;
+    }
+    #search-form button:hover {
+      background-color: #d89f1f;
+      box-shadow: 0 7px 14px #d89f1fbb;
+    }
+
+    /* 上方两个按钮 */
+    #random-btn,
+    #go-comment-btn {
+      width: 97%;
+      padding: 12px 0;
+      margin-bottom: 15px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 3px 8px #f5c64faa;
+      transition: background-color 0.3s ease;
+      color: #fff;
+      background: #f5c64f;
+    }
+    #random-btn:hover,
+    #go-comment-btn:hover {
+      background: #d89f1f;
+      box-shadow: 0 5px 12px #d89f1fbb;
+    }
+    #go-ranking-btn{
+      width: 97%;
+      padding: 12px 0;
+      margin-bottom: 15px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 3px 8px #f5c64faa;
+      transition: background-color 0.3s ease;
+      color: #fff;
+      background: #f5c64f;
+    }
+    #go-ranking-btn:hover {
+      background: #d89f1f;
+      box-shadow: 0 5px 12px #d89f1fbb;
+    }
+
+    /* 结果列表 */
+    #restaurant-list > div {
+      background: #fff;
+      padding: 16px 20px;
+      margin-bottom: 16px;
+      border-radius: 10px;
+      box-shadow: 0 3px 8px #f5c64f77;
+      transition: box-shadow 0.3s ease;
+    }
+    #restaurant-list > div:hover {
+      box-shadow: 0 6px 14px #f5c64fbb;
+    }
+
+    /* 结果标题 */
+    #restaurant-list strong {
+      font-size: 1.15rem;
+      color: #e3a617;
+    }
+
+    /* 结果字段排版 */
+    #restaurant-list p {
+      margin: 4px 0;
+      font-size: 0.9rem;
+      color: #666;
+      line-height: 1.4;
+    }
+
+  </style>
+</head>
+<body>
+  <div id="map-container"></div>
+
+  <div id="sidebar">
+    <button type="button" id="random-btn">今天齐莫斯</button>
+    <button type="button" id="go-comment-btn">劳资要克评论</button>
+    <button type="button" id="go-ranking-btn" >别个齐莫斯</button>
+    
+    <h3>查询条件</h3>
+    <form id="search-form">
+      <input type="text" id="shop_name" placeholder="店铺名称" />
+      
+      <select id="category" title="分类">
+        <option value="">全部分类</option>
+        <option value="五谷杂粮">五谷杂粮</option>
+        <option value="早餐">早餐</option>
+        <option value="烧烤">烧烤</option>
+        <option value="面包甜点">面包甜点</option>
+      </select>
+    
+      <select id="region" title="地区">
+        <option value="">全部地区</option>
+        <option value="武昌">武昌</option>
+        <option value="汉口">汉口</option>
+        <option value="汉阳">汉阳</option>
+        <option value="青山">青山</option>
+        <option value="蔡甸">蔡甸</option>
+        <option value="硚口">硚口</option>
+        <option value="江夏">江夏</option>
+      </select>
+    
+      <select id="business_hours" title="营业时段">
+        <option value="">全部时段</option>
+        <option value="早餐">早餐</option>
+        <option value="午餐">午餐</option>
+        <option value="晚餐">晚餐</option>
+        <option value="夜宵">夜宵</option>
+      </select>
+    
+     <select id="recommend_level" title="推荐等级">
+        <option value="">全部等级</option>
+        <option value="推荐">推荐</option>
+        <option value="可以试试">可以试试</option>
+        <option value="必吃">必吃</option>
+      </select>
+
+      <input type="text" id="cuisine_type" placeholder="菜系类型" />
+      <input type="number" id="people" placeholder="用餐人数" min="1" />
+      <input type="number" id="min_price" placeholder="最低价格" min="0" />
+      <input type="number" id="max_price" placeholder="最高价格" min="0" />
+    
+      <button type="submit">搜索</button>
+    </form>
+
+    <div id="restaurant-list"></div>
+    <div id="poiList"></div>
+  </div>
+
+  <script src="./main.js"></script>
+</body>
+</html>

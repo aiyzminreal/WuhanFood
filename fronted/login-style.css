@@ -1,0 +1,109 @@
+/* login-style.css */
+
+/* 背景全屏铺满，使用美食背景图，自己换成合适的图片URL */
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1350&q=80') no-repeat center center fixed;
+  background-size: cover;
+  position: relative;
+}
+
+/* 半透明遮罩层，让背景更柔和 */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 0;
+}
+
+/* 登录容器居中，层级高于遮罩 */
+.auth-container {
+  position: relative;
+  z-index: 1;
+  width: 360px;
+  padding: 30px 40px;
+  background-color: rgba(255, 255, 255, 0.95);
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+  margin: auto;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* 标题 */
+.auth-container h2 {
+  margin-bottom: 20px;
+  color: #333;
+  text-align: center;
+  font-weight: 700;
+  font-size: 28px;
+}
+
+/* 表单布局 */
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* 标签样式 */
+.form-group label {
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #444;
+}
+
+/* 输入框和选择框 */
+.form-group input,
+.form-group select {
+  padding: 12px 15px;
+  font-size: 16px;
+  border: 1.5px solid #ccc;
+  border-radius: 6px;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  border-color: #e67e22;
+  box-shadow: 0 0 8px #f9b239aa;
+}
+
+/* 登录按钮 */
+button[type="submit"] {
+  padding: 12px 0;
+  background-color: #f9b239;
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  font-weight: 700;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+  background-color: #e67e22;
+}
+
+/* 下面的注册链接 */
+.auth-container p {
+  margin-top: 18px;
+  text-align: center;
+  color: #666;
+}
+
+.auth-container a {
+  color: #f9b239;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.auth-container a:hover {
+  text-decoration: underline;
+}

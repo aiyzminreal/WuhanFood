@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>注册 - 用户注册</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    :root {
+      --primary-color: #fdcb00;
+      --secondary-color: #f5f7ff;
+      --text-color: #333;
+      --light-gray: #f0f2f5;
+      --border-color: #ddd;
+      --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+    
+    body {
+      font-family: 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+      background-color: var(--light-gray);
+      color: var(--text-color);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 20px;
+      line-height: 1.6;
+    }
+    
+    .auth-container {
+      background: white;
+      border-radius: 10px;
+      box-shadow: var(--shadow);
+      padding: 2rem;
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
+    }
+    
+    h2 {
+      color: var(--primary-color);
+      margin-bottom: 1.5rem;
+      font-weight: 600;
+    }
+    
+    .auth-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+    
+    .form-group {
+      text-align: left;
+    }
+    
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      color: #555;
+    }
+    
+    input, select {
+      width: 100%;
+      padding: 0.8rem;
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      font-size: 1rem;
+      transition: border 0.3s ease;
+    }
+    
+    input:focus, select:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 2px rgba(74, 107, 255, 0.2);
+    }
+    
+    input::placeholder {
+      color: #aaa;
+    }
+    
+    button {
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      padding: 0.8rem;
+      border-radius: 6px;
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      margin-top: 0.5rem;
+    }
+    
+    button:hover {
+      background-color: #ffb81e;
+    }
+    
+    p {
+      margin-top: 1.5rem;
+      color: #666;
+    }
+    
+    a {
+      color: var(--primary-color);
+      text-decoration: none;
+      font-weight: 500;
+    }
+    
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="auth-container">
+    <h2>创建您的账户</h2>
+    <form id="registerForm" class="auth-form">
+      <div class="form-group">
+        <label for="username">用户名</label>
+        <input type="text" id="username" required placeholder="请输入用户名">
+      </div>
+      <div class="form-group">
+        <label for="password">密码</label>
+        <input type="password" id="password" required placeholder="请输入密码">
+      </div>
+      <div class="form-group">
+        <label for="confirmPassword">确认密码</label>
+        <input type="password" id="confirmPassword" required placeholder="再次输入密码">
+      </div>
+      <div class="form-group">
+        <label for="role">角色</label>
+        <select id="role">
+          <option value="user">用户端</option>
+          <option value="admin">管理员端</option>
+          <option value="shop">店家端</option>
+        </select>
+      </div>
+      <button type="submit">立即注册</button>
+    </form>
+    <p>已有账号？<a href="login.html">返回登录</a></p>
+  </div>
+  <script src="register.js"></script>
+</body>
+</html>

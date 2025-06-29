@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>随机美食推荐</title>
+  <script src="https://webapi.amap.com/maps?v=2.0&key=2024c5f9433e3501f4292255e7fd83e6"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC&display=swap" rel="stylesheet" />
+  <style>
+    /* 基础字体与布局 */
+    body {
+      font-family: 'Noto Sans SC', sans-serif, Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #faf7e1;
+      color: #3a3a3a;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    h1 {
+      margin: 20px 0 10px;
+      color: #e67e22;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    /* 地图与信息并排 */
+    #container {
+      display: flex;
+      width: 90%;
+      max-width: 1100px;
+      gap: 20px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    #map-container {
+      flex: 1 1 60%;
+      height: 480px;
+      border-radius: 8px;
+      box-shadow: 0 6px 14px rgba(230, 126, 34, 0.3);
+    }
+
+    #info {
+      flex: 1 1 35%;
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 6px 14px rgba(230, 126, 34, 0.2);
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-y: auto;
+      max-height: 480px;
+      color: #333;
+    }
+
+    /* 按钮样式 */
+    #rerandom-btn {
+      padding: 12px 36px;
+      font-size: 18px;
+      font-weight: 600;
+      background-color: #f9b239;
+      color: white;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      box-shadow: 0 4px 10px #f9b239bb;
+      transition: background-color 0.3s ease;
+      margin-bottom: 40px;
+    }
+    #rerandom-btn:hover {
+      background-color: #e67e22;
+      box-shadow: 0 6px 14px #e67e22cc;
+    }
+
+    /* 响应式调整：手机屏幕下竖排 */
+    @media (max-width: 768px) {
+      #container {
+        flex-direction: column;
+        width: 95%;
+      }
+      #map-container, #info {
+        flex: 1 1 100%;
+        max-height: none;
+        height: 300px;
+      }
+      #info {
+        margin-top: 15px;
+        max-height: 300px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>今天吃这个</h1>
+
+  <div id="container">
+    <div id="map-container"></div>
+    <div id="info">加载中…</div>
+  </div>
+
+  <button type="button" id="rerandom-btn">再抽一次 🎲</button>
+
+  <script src="./random.js"></script>
+</body>
+</html>
